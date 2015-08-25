@@ -16,6 +16,11 @@ import android.widget.TextView;
 public class FirstFragment extends Fragment {
 
     /**
+     * fields
+     */
+    private static FirstFragment instance = null;
+
+    /**
      * Create fragment view when paginated.
      * @param inflater
      * @param container
@@ -41,16 +46,22 @@ public class FirstFragment extends Fragment {
      */
     public static FirstFragment newInstance(String text){
 
-        // new instance
-        FirstFragment fragment = new FirstFragment();
+        if(instance == null){
+            // new instance
+            instance = new FirstFragment();
 
-        // sets data to bundle
-        Bundle bundle = new Bundle();
-        bundle.putString("msg", text);
+            // sets data to bundle
+            Bundle bundle = new Bundle();
+            bundle.putString("msg", text);
 
-        // set data to fragment
-        fragment.setArguments(bundle);
+            // set data to fragment
+            instance.setArguments(bundle);
 
-        return fragment;
+            return instance;
+        } else {
+
+            return instance;
+        }
+
     }
 }

@@ -10,13 +10,14 @@ import android.widget.RadioGroup;
 
 
 public class MainActivity extends FragmentActivity
-        implements ViewPager.OnPageChangeListener {
+        implements ViewPager.OnPageChangeListener, RadioGroup.OnCheckedChangeListener{
 
     /**
      * fields
      */
     private static final int NUMBER_OF_PAGES = 3;
     private RadioGroup radioGroup;
+    ViewPager pager;
 
     /**
      * {@inheritDoc}
@@ -26,11 +27,12 @@ public class MainActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
+        pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
         pager.addOnPageChangeListener(this);
 
         radioGroup = (RadioGroup)findViewById(R.id.radiogroup);
+        radioGroup.setOnCheckedChangeListener(this);
     }
 
     /*************************************************************
@@ -75,6 +77,26 @@ public class MainActivity extends FragmentActivity
     @Override
     public void onPageScrollStateChanged(int position) {
 
+    }
+
+    /**
+     * On checked listener to Radio Buttons.
+     * @param group
+     * @param checkedId
+     */
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch(checkedId) {
+            case R.id.radioButton1:
+                pager.setCurrentItem(0);
+                break;
+            case R.id.radioButton2:
+                pager.setCurrentItem(1);
+                break;
+            case R.id.radioButton3:
+                pager.setCurrentItem(2);
+                break;
+        }
     }
 
     /**

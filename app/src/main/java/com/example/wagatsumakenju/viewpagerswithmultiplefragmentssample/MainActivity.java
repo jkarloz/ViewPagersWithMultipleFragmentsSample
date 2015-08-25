@@ -6,14 +6,17 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.widget.RadioGroup;
 
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity
+        implements ViewPager.OnPageChangeListener {
 
     /**
      * fields
      */
     private static final int NUMBER_OF_PAGES = 3;
+    private RadioGroup radioGroup;
 
     /**
      * {@inheritDoc}
@@ -25,12 +28,59 @@ public class MainActivity extends FragmentActivity {
 
         ViewPager pager = (ViewPager) findViewById(R.id.viewPager);
         pager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+        pager.addOnPageChangeListener(this);
+
+        radioGroup = (RadioGroup)findViewById(R.id.radiogroup);
+    }
+
+    /*************************************************************
+     * Listeners for ViewPager
+     *************************************************************/
+    /**
+     * When the current page is scrolled
+     * @param position
+     * @param v
+     * @param i
+     */
+    @Override
+    public void onPageScrolled(int position, float v, int i) {
+
     }
 
     /**
-     * Custom Page adapter
+     * When a new page becomes selected
+     * @param position
      */
-    private class MyPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onPageSelected(int position) {
+        switch(position) {
+            case 0:
+                radioGroup.check(R.id.radioButton1);
+                break;
+            case 1:
+                radioGroup.check(R.id.radioButton2);
+                break;
+            case 2:
+                radioGroup.check(R.id.radioButton3);
+                break;
+            default:
+                radioGroup.check(R.id.radioButton1);
+        }
+    }
+
+    /**
+     * When the pager is automatically setting to the current page
+     * @param position
+     */
+    @Override
+    public void onPageScrollStateChanged(int position) {
+
+    }
+
+    /**
+     * Custom PagerAdapter class
+     */
+    private class MyPagerAdapter extends FragmentPagerAdapter{
 
         /**
          * Constructor
@@ -48,10 +98,14 @@ public class MainActivity extends FragmentActivity {
         @Override
         public Fragment getItem(int position) {
             switch(position) {
-                case 0: return FirstFragment.newInstance("FirstFragment, Instance 1");
-                case 1: return SecondFragment.newInstance("SecondFragment, Instance 1");
-                case 2: return ThirdFragment.newInstance("ThirdFragment, Instance 1");
-                default: return FirstFragment.newInstance("FirstFragment, Default");
+                case 0:
+                    return FirstFragment.newInstance("FirstFragment, Instance 1");
+                case 1:
+                    return SecondFragment.newInstance("SecondFragment, Instance 1");
+                case 2:
+                    return ThirdFragment.newInstance("ThirdFragment, Instance 1");
+                default:
+                    return FirstFragment.newInstance("FirstFragment, Default");
             }
         }
 
@@ -63,6 +117,8 @@ public class MainActivity extends FragmentActivity {
         public int getCount() {
             return NUMBER_OF_PAGES;
         }
+
+
     }
 
 

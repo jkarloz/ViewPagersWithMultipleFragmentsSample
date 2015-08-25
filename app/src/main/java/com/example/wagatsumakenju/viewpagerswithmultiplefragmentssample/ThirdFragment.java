@@ -13,7 +13,7 @@ import android.widget.TextView;
  *
  * Created by wagatsumakenju on 2015/08/25.
  */
-public class SecondFragment extends Fragment {
+public class ThirdFragment extends Fragment {
 
     /**
      * Create fragment view when paginated.
@@ -25,9 +25,9 @@ public class SecondFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.second_frag, container, false);
+        View v = inflater.inflate(R.layout.third_frag, container, false);
 
-        TextView textView = (TextView) v.findViewById(R.id.tvFragSecond);
+        TextView textView = (TextView) v.findViewById(R.id.tvFragThird);
         textView.setText(getArguments().getString("msg"));
 
         return v;
@@ -39,10 +39,10 @@ public class SecondFragment extends Fragment {
      * @param text
      * @return
      */
-    public static SecondFragment newInstance(String text){
+    public static ThirdFragment newInstance(String text){
 
         // new instance
-        SecondFragment fragment = new SecondFragment();
+        ThirdFragment fragment = new ThirdFragment();
 
         // sets data to bundle
         Bundle bundle = new Bundle();

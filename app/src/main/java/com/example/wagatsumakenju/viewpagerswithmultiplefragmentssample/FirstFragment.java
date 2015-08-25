@@ -9,9 +9,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
+ * Fragment class.
+ *
  * Created by wagatsumakenju on 2015/08/25.
  */
 public class FirstFragment extends Fragment {
+
+    /**
+     * Create fragment view when paginated.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -23,11 +33,24 @@ public class FirstFragment extends Fragment {
         return v;
     }
 
+    /**
+     * Returns new instance.
+     *
+     * @param text
+     * @return
+     */
     public static FirstFragment newInstance(String text){
-        FirstFragment f = new FirstFragment();
-        Bundle b = new Bundle();
-        b.putString("msg", text);
-        f.setArguments(b);
-        return f;
+
+        // new instance
+        FirstFragment fragment = new FirstFragment();
+
+        // sets data to bundle
+        Bundle bundle = new Bundle();
+        bundle.putString("msg", text);
+
+        // set data to fragment
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 }
